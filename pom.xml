@@ -4,12 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>fr.home.app.planner-back</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>PlannerAPI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<modules>
 		<module>domain</module>
 		<module>persistence</module>
 		<module>web</module>
+		<module>services</module>
+		<module>process</module>
 	</modules>
 	<packaging>pom</packaging>
 
@@ -34,6 +36,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.12</version>
 		</dependency>
 	</dependencies>
 </project>
