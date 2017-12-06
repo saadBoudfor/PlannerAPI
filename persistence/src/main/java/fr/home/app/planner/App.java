@@ -26,6 +26,7 @@ public class App implements CommandLineRunner{
                 .city("Montpellier")
                 .country("France")
                 .type(AddressType.MAIN)
+                .name("Domicile")
                 .build();
         addressRepository.save(address);
 
