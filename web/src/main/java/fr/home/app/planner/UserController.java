@@ -1,5 +1,6 @@
 package fr.home.app.planner;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class UserController {
         this.userRepository = jpaUserRepository;
     }
 
+    @Secured({"ROLE_MANAGER", "ROLE_ADMIN"})
     @GetMapping
     public List<User> findAll() {
         return userRepository.findAll();
