@@ -12,6 +12,7 @@
 		<module>web</module>
 		<module>services</module>
 		<module>process</module>
+		<module>root</module>
 	</modules>
 	<packaging>pom</packaging>
 
