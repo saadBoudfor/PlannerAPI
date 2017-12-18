@@ -1,38 +1,38 @@
 package fr.home.app.planner;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Date;
 
 @Entity
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "ADDRESS")
-@Data class Address {
-
+class Goal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String street;
-    private int postalZip;
-    private String city;
-    private String country;
-    private String complement;
-
-    @Enumerated(value = EnumType.STRING)
-    private AddressType type;
-
     @NotNull
-    private String name;
+    private Date startDate;
+    @NotNull
+    private Date endDate;
+    @NotNull
+    private String title;
+    private String description;
+    @Enumerated(EnumType.STRING)
+    private GoalType type;
+    @ManyToOne
+    private Goal parent;
 }
