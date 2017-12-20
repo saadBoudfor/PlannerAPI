@@ -14,5 +14,3 @@ log.*
 *.log
 git.properties
 dependency-reduced-pom.xml
-process/src/
-services/src/

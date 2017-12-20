@@ -6,30 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "USERS")
-@Data
-class User {
+@Builder
+@Table(name = "USER_ROLES")
+class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    private String username;
-    private boolean enabled;
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Address> addressList;
+    private String name;
+    private String description;
+    private Long userId;
 }

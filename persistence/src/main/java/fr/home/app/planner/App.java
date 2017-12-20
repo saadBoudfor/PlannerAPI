@@ -1,5 +1,6 @@
 package fr.home.app.planner;
 
+import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -7,15 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class App implements CommandLineRunner{
+@AllArgsConstructor
+public class App implements CommandLineRunner {
 
-    private JpaUserRepository userRepository;
+    private UserRepository userRepository;
     private JpaAddressRepository addressRepository;
-
-    public App(JpaUserRepository jpaUserRepository, JpaAddressRepository addressRepository){
-        this.userRepository = jpaUserRepository;
-        this.addressRepository = addressRepository;
-    }
 
     @Override
     public void run(String... strings) throws Exception {
@@ -28,10 +25,11 @@ public class App implements CommandLineRunner{
                 .type(AddressType.MAIN)
                 .name("Domicile")
                 .build();
-        addressRepository.save(address);
 
         List<Address> addressList = new ArrayList<>();
         addressList.add(address);
+
+        addressRepository.save(address);
 
         User user = User.builder()
                 .email("saad.boudfor@capgemini.com")
@@ -41,5 +39,16 @@ public class App implements CommandLineRunner{
                 .build();
 
         userRepository.save(user);
-  }
+
+
+        User user2 = User.builder()
+                .email("hajar.boudfor@capgemini.com")
+                .firstName("hajar")
+                .lastName("boudfor")
+                .addressList(addressList)
+                .build();
+
+        userRepository.save(user2);
+
+    }
 }
