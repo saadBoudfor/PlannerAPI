@@ -13,9 +13,21 @@ public class App implements CommandLineRunner {
 
     private UserRepository userRepository;
     private JpaAddressRepository addressRepository;
+    private RolesRepository rolesRepository;
 
     @Override
     public void run(String... strings) throws Exception {
+        Role userRole = Role.builder().name("USER").description("restrictive access to planner app").build();
+        Role adminRole = Role.builder().name("ADMIN").description("full access to planner app").build();
+
+        rolesRepository.save(adminRole);
+        rolesRepository.save(userRole);
+        List<Role> roles = new ArrayList<>();
+        List<Role> roles1 = new ArrayList<>();
+
+        roles.add(adminRole);
+        roles1.add(userRole);
+
         Address address = Address.builder()
                 .street("7 rue des amaryllis")
                 .complement("Logement 213, batiment 5")
@@ -36,6 +48,10 @@ public class App implements CommandLineRunner {
                 .firstName("saad")
                 .lastName("boudfor")
                 .addressList(addressList)
+                .roles(roles)
+                .username("sboudfor")
+                .password("123")
+                .enabled(true)
                 .build();
 
         userRepository.save(user);
@@ -46,9 +62,14 @@ public class App implements CommandLineRunner {
                 .firstName("hajar")
                 .lastName("boudfor")
                 .addressList(addressList)
+                .roles(roles1)
+                .username("hboudfor")
+                .password("456")
+                .enabled(true)
                 .build();
 
         userRepository.save(user2);
+
 
     }
 }

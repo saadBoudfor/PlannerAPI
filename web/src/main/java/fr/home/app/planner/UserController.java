@@ -6,9 +6,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,23 +26,12 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @Secured({"ROLE_MANAGER", "ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN"})
     @GetMapping
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
-    @PostMapping
-    public User loadUser(@RequestBody final User user) {
-        userRepository.save(user);
-        return userRepository.getOne(user.getId());
-    }
-
-    @PutMapping
-    public User updateUser(@RequestBody final User user) {
-        userRepository.save(user);
-        return userRepository.getOne(user.getId());
-    }
 
     @DeleteMapping("/{id}")
     public Long deleteUser(@PathVariable("id") Long userId) {
