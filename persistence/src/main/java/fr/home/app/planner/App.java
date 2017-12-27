@@ -13,20 +13,16 @@ public class App implements CommandLineRunner {
 
     private UserRepository userRepository;
     private JpaAddressRepository addressRepository;
-    private RolesRepository rolesRepository;
+    private JwtUserRepository jwtUserRepository;
 
     @Override
     public void run(String... strings) throws Exception {
-        Role userRole = Role.builder().name("USER").description("restrictive access to planner app").build();
-        Role adminRole = Role.builder().name("ADMIN").description("full access to planner app").build();
 
-        rolesRepository.save(adminRole);
-        rolesRepository.save(userRole);
-        List<Role> roles = new ArrayList<>();
-        List<Role> roles1 = new ArrayList<>();
+        JwtUser jwtUser1 = JwtUser.builder().userName("saad").password("123").build();
+        JwtUser jwtUser2 = JwtUser.builder().userName("hajar").password("123").build();
 
-        roles.add(adminRole);
-        roles1.add(userRole);
+        jwtUserRepository.save(jwtUser1);
+        jwtUserRepository.save(jwtUser2);
 
         Address address = Address.builder()
                 .street("7 rue des amaryllis")
@@ -48,10 +44,8 @@ public class App implements CommandLineRunner {
                 .firstName("saad")
                 .lastName("boudfor")
                 .addressList(addressList)
-                .roles(roles)
-                .username("sboudfor")
                 .password("123")
-                .enabled(true)
+                .jwtUser(jwtUser1)
                 .build();
 
         userRepository.save(user);
@@ -62,10 +56,8 @@ public class App implements CommandLineRunner {
                 .firstName("hajar")
                 .lastName("boudfor")
                 .addressList(addressList)
-                .roles(roles1)
-                .username("hboudfor")
                 .password("456")
-                .enabled(true)
+                .jwtUser(jwtUser2)
                 .build();
 
         userRepository.save(user2);
