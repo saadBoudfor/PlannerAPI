@@ -1,17 +1,22 @@
 package fr.home.app.planner;
 
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/users")
 public class UserController {
 
-    private JpaUserRepository userRepository;
+    private UserRepository userRepository;
 
-    public UserController(JpaUserRepository jpaUserRepository) {
-        this.userRepository = jpaUserRepository;
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @GetMapping
@@ -19,17 +24,6 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @PostMapping
-    public User loadUser(@RequestBody final User user) {
-        userRepository.save(user);
-        return userRepository.getOne(user.getId());
-    }
-
-    @PutMapping
-    public User updateUser(@RequestBody final User user) {
-        userRepository.save(user);
-        return userRepository.getOne(user.getId());
-    }
 
     @DeleteMapping("/{id}")
     public Long deleteUser(@PathVariable("id") Long userId) {
