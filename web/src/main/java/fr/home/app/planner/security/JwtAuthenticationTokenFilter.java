@@ -2,7 +2,6 @@ package fr.home.app.planner.security;
 
 import fr.home.app.planner.model.JwtAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
 import javax.servlet.FilterChain;
@@ -18,13 +17,14 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws
+            IOException, ServletException {
 
         String header = httpServletRequest.getHeader("Authorisation");
 
 
         if (header == null || !header.startsWith("Token ")) {
-            throw new RuntimeException("JWT Token is missing");
+            throw new TokenException("JWT Token is missing");
         }
 
         String authenticationToken = header.substring(6);

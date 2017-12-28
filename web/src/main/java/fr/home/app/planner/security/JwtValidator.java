@@ -26,7 +26,9 @@ public class JwtValidator {
             jwtUser.setRole((String) body.get("role"));
         }
         catch (Exception e) {
-            System.out.println(e);
+            /*
+                    Add logger
+             */
         }
 
         return jwtUser;
