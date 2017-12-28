@@ -18,8 +18,8 @@ public class App implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-        JwtUser jwtUser1 = JwtUser.builder().userName("saad").password("123").build();
-        JwtUser jwtUser2 = JwtUser.builder().userName("hajar").password("123").build();
+        JwtUser jwtUser1 = JwtUser.builder().userName("saad").password("123").role("ADMIN").build();
+        JwtUser jwtUser2 = JwtUser.builder().userName("hajar").password("123").role("USER").build();
 
         jwtUserRepository.save(jwtUser1);
         jwtUserRepository.save(jwtUser2);
@@ -44,7 +44,6 @@ public class App implements CommandLineRunner {
                 .firstName("saad")
                 .lastName("boudfor")
                 .addressList(addressList)
-                .password("123")
                 .jwtUser(jwtUser1)
                 .build();
 
@@ -56,7 +55,6 @@ public class App implements CommandLineRunner {
                 .firstName("hajar")
                 .lastName("boudfor")
                 .addressList(addressList)
-                .password("456")
                 .jwtUser(jwtUser2)
                 .build();
 

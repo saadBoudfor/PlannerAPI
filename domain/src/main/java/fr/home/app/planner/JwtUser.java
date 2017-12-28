@@ -16,9 +16,10 @@ import javax.persistence.Id;
 @Entity
 @Builder
 public class JwtUser {
-    private String userName;
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    private String userName;
     private String role;
     private String password;
 }

@@ -24,12 +24,11 @@ import java.util.Collection;
 @Table(name = "USERS")
 @Data
 class User {
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "USERS_ADDRESS_LISTS")
     private Collection<Address> addressList;

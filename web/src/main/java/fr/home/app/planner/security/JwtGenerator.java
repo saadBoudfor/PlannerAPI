@@ -19,7 +19,7 @@ public class JwtGenerator {
 
         return Jwts.builder()
                 .setClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, "youtube")
+                .signWith(SignatureAlgorithm.HS512, JwtValidator.getSECRET())
                 .compact();
     }
 }

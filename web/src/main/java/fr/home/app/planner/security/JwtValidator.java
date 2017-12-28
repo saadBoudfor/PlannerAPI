@@ -33,4 +33,8 @@ public class JwtValidator {
 
         return jwtUser;
     }
+
+    static String getSECRET() {
+        return SECRET;
+    }
 }
