@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtValidator {
 
-    private static final String SECRET = "youtube";
+    private static final String SECRET = "jwt_secret";
 
     JwtUser validate(String token) {
         JwtUser jwtUser = null;
@@ -24,8 +24,7 @@ public class JwtValidator {
             jwtUser.setUserName(body.getSubject());
             jwtUser.setId(Long.parseLong((String) body.get("userId")));
             jwtUser.setRole((String) body.get("role"));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             /*
                     Add logger
              */

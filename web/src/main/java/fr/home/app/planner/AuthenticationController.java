@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     private JwtGenerator jwtGenerator;
-    private JwtUserServices jwtUserServices;
-    private AuthenticationProcess authenticationProcess;
+    private IJwtUserServices jwtUserServices;
+    private IAuthenticationProcess authenticationProcess;
 
     @PostMapping("/token")
     public String generate(@RequestBody Login login) {

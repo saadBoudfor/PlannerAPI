@@ -9,18 +9,19 @@ import java.util.Collection;
 
 @AllArgsConstructor
 @Component
-class AuthenticationProcess {
+class AuthenticationProcess implements IAuthenticationProcess {
 
     private JwtUserRepository jwtUserRepository;
     private JpaAddressRepository addressRepository;
     private UserRepository userRepository;
+    private static final String DEFAULT_ROLE = "USER";
 
-    void createAccount(UserView userView) {
+    public void createAccount(UserView userView) {
 
         JwtUser jwtUser = JwtUser.builder()
                 .userName(userView.getUsername())
                 .password(userView.getPassword())
-                .role("USER")
+                .role(DEFAULT_ROLE)
                 .build();
         jwtUserRepository.save(jwtUser);
 

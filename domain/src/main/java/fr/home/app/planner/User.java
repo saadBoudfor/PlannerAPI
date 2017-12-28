@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,10 +25,12 @@ import java.util.Collection;
 @Table(name = "USERS")
 @Data
 class User {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String email;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "USERS_ADDRESS_LISTS")
