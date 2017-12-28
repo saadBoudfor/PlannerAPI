@@ -5,12 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity
@@ -20,17 +25,17 @@ import java.util.Collection;
 @Table(name = "USERS")
 @Data
 class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String email;
-    private String password;
-    @Id
-    private String username;
-    private boolean enabled;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "USERS_ADDRESS_LISTS")
     private Collection<Address> addressList;
-    @ManyToMany
-    @JoinTable(name = "USERS_ROLES_LISTS")
-    private Collection<Role> roles;
+    @OneToOne
+    @NotNull
+    private JwtUser jwtUser;
 }
