@@ -18,7 +18,7 @@ public class TokenController {
     private JwtUserServices jwtUserServices;
 
     @PostMapping
-    public String generate(@RequestBody final Login login) {
+    public String generate(@RequestBody Login login) {
         return jwtGenerator.generate(jwtUserServices.authenticate(login));
     }
 }
